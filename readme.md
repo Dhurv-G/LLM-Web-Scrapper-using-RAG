@@ -1,46 +1,53 @@
+# **LLM-Based RAG System**
 
-# LLM-Based RAG System
+## **Overview**
 
-## Overview
+This project implements a Retrieval-Augmented Generation (RAG) system using a Large Language Model (LLM). The system integrates with APIs to scrape content from the web and uses a separate API to serve LLM-generated answers. It features a Streamlit-based front-end interface for user interaction and a Flask backend for processing.
 
-This project is designed to create a Retrieval-Augmented Generation (RAG) system using a Large Language Model (LLM). The system integrates with an API to scrape content from the internet and uses an API to serve the LLM-generated answers. A simple front-end interface is provided to interact with the system. 
-Note: ONLY use the packages provided in the requirements.txt file (similar/alternative packages are ok only if they perform similar task/function). 
+**Note:** Only use the packages listed in the `requirements.txt` file. Similar or alternative packages are acceptable if they perform equivalent functions.
 
-## Process Overview
+---
+
+## **Process Overview**
 
 1. **User Input via Streamlit Interface**:
-   - The user interacts with a Streamlit-based front-end where they can input their query.
+   - The user enters a query through the Streamlit front-end.
 
 2. **Query Sent to Flask Backend**:
-   - The query entered by the user is sent from the Streamlit interface to a Flask backend via an API call.
+   - The user’s query is sent to the Flask backend via an API call for processing.
 
 3. **Internet Search and Article Scraping**:
-   - The Flask backend searches the internet for the query using a designated API. It retrieves the top relevant articles and scrapes their content, extracting only the useful text (headings and paragraphs).
+   - The Flask backend performs an internet search using an API.
+   - It retrieves the most relevant articles and scrapes their content (e.g., headings and paragraphs).
 
 4. **Content Processing**:
-   - The scraped content is processed to create a coherent input, which is then passed to the LLM for generating a response.
+   - The scraped content is pre-processed to form coherent input for the LLM.
 
 5. **LLM Response Generation**:
-   - The processed content and the user's query are used to generate a contextual answer using the LLM. The LLM is accessed via an API, and the generated response is returned to the Flask backend.
+   - The processed content, combined with the user’s query, is sent to an LLM API.
+   - The LLM generates a contextual response and sends it back to the Flask backend.
 
 6. **Response Sent Back to Streamlit Interface**:
-   - The Flask backend sends the generated answer back to the Streamlit interface, where it is displayed to the user.
+   - The Flask backend returns the response, which is displayed in the Streamlit front-end.
 
-## What we expect?
-We expect you to explore, understand the components and functionality, and demonstrate your ability to work with the provided tools and deliver a solution that meets the requirements. 
+**Bonus Feature**: Use LangChain or similar tools to add memory and enhance conversational abilities.
 
-Bonus points: If you use Langchain (or similar tools to add memory to the system) to make the chatbot conversational.
-## Prerequisites
+---
+
+## **Prerequisites**
 
 - Python 3.8 or above
+- API keys for internet search and LLM services
 
-## Setup Instructions
+---
+
+## **Setup Instructions**
 
 ### Step 1: Clone or download the Repository (if emailed)
 
 ```bash
-git clone https://github.com/your-repo-url.git
-cd project_name
+git clone https://github.com/Dhurv-G/LLM-Web-Scrapper-using-RAG.git
+cd LLM-Web-Scrapper-using-RAG
 ```
 
 Or download it
@@ -71,7 +78,13 @@ pip install -r requirements.txt
 
 ### Step 4: Set Up Environment Variables
 
-Create a `.env` file in the root directory and add your API keys in a way it can be accessed in the app.
+Create a `.env` file in the root directory.  
+Add your API keys and any other sensitive data as follows:
+
+```plaintext
+FLASK_API_KEY=your_flask_api_key
+LLM_API_KEY=your_llm_api_key
+```
 
 
 ### Step 5: Run the Flask Backend
@@ -96,19 +109,29 @@ streamlit run app.py
 
 Open your web browser and go to `http://localhost:8501`. You can now interact with the system by entering your query.
 
-## Project Structure
+## **Project Structure** 
 
+```plaintext
+LLM-Web-Scrapper-using-RAG/
+├── flask_app/
+│   ├── app.py           # Flask backend
+│   └── utils.py         # Utility functions for processing
+├── streamlit_app/
+│   ├── app.py           # Streamlit front-end
+│   └── utils.py         # Utility functions for front-end
+├── .env                 # Environment variables (not included in version control)
+├── requirements.txt     # Project dependencies
+└── README.md            # Documentation
+```
 - **flask_app/**: Contains the backend Flask API and utility functions.
 - **streamlit_app/**: Contains the Streamlit front-end code.
 - **.env**: Stores API keys (make sure this file is not included in version control).
 - **requirements.txt**: Lists the project dependencies.
 
-## Task Instructions for Candidates
+## **Future Enhancements**
 
-You are required to complete the following:
-
-1. Implement the functionality to fetch, process, and generate responses from an LLM using the provided APIs.
-2. Integrate the APIs with the Flask backend.
-3. Display the results in the Streamlit frontend.
-
-Good luck!
+- **Enable Multi-Language Support**: Expand the system to support multiple languages for both input queries and responses.
+- **Advanced Search Integration**: Include additional data sources (e.g., Google Scholar, PubMed, or specific APIs) for retrieving more diverse and authoritative content.
+- **Scalability with Cloud Services**: Migrate the system to cloud-based platforms like AWS or GCP for better scalability and performance during high traffic.
+- **Feedback and Learning Mechanism**: Implement a feedback loop for users to rate the responses, enabling continuous improvement of the system.
+- **Offline Query Processing**: Add functionality to handle queries offline using pre-saved or cached data to reduce dependency on live internet access.
